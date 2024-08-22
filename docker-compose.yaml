@@ -1,4 +1,4 @@
-
+version: '3.8'
 services:
   db:
     container_name: postgres_container
@@ -8,5 +8,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: test_db
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "6543:5432"
