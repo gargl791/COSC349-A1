@@ -12,3 +12,14 @@ services:
       - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "6543:5432"
+  
+  backend:
+    build:
+      context: ./backend  # Path to the backend directory
+      dockerfile: Dockerfile  # Dockerfile is in the backend directory
+    ports:
+      - "1300:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/usr/src/app  # Mount backend directory into the container

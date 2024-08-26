@@ -1,15 +1,16 @@
 const express = require("express");
 const { Pool } = require("pg");
+const port = 3000;
 
 const app = express();
 app.use(express.json());
 // Database connection pool
 const pool = new Pool({
   user: "root",
-  host: "localhost", // Or the IP address of the Docker container
+  host: "db", // the service name of database in docker-compose.yml
   database: "test_db",
   password: "root",
-  port: 6543, // Default PostgreSQL port
+  port: 5432, // Default PostgreSQL port
 });
 
 // Test the database connection
@@ -36,6 +37,7 @@ app.use("/api/users", userRoutes(pool));
 app.use("/api/tasks", taskRoutes(pool));
 app.use("/api/categories", categoryRoutes(pool));
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
