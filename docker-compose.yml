@@ -28,5 +28,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    # volumes:
-    #   - ./backend:/usr/src/app
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
