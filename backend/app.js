@@ -1,8 +1,13 @@
 const express = require("express");
 const { Pool } = require("pg");
-const port = 3000;
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:5173",
+};
 
+const port = 3000;
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 // Database connection pool
 const pool = new Pool({
@@ -44,6 +49,10 @@ app.use("/api/categories", categoryRoutes(pool));
 //
 app.use((req, res) => {
   res.status(404).json({ error: "Endpoint not found" });
+});
+
+app.get("/api", (req, res) => {
+  res.json({ fruits: ["apple", "banana", "cherry"] });
 });
 
 app.listen(port, () => {
