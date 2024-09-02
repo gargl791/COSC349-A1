@@ -42,7 +42,7 @@ const categoryRoutes = require("./routes/categories");
 app.use("/api/users", userRoutes(pool));
 app.use("/api/tasks", taskRoutes(pool));
 app.use("/api/categories", categoryRoutes(pool));
-app, use("/api/auth", authRoutes(pool));
+app.use("/api/auth", authRoutes(pool));
 // Catch-all route for undefined endpoints
 
 // app.use((req, res) => {

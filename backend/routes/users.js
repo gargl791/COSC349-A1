@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 module.exports = (pool) => {
@@ -15,7 +15,7 @@ module.exports = (pool) => {
         [username, email, password_hash],
       );
       res.json(newUser.rows[0]);
-      res.status(201).json("User created successfully");
+      // res.status(201).json("User created successfully");
     } catch (err) {
       console.error(err.message);
       res.status(500).json("Server Error");

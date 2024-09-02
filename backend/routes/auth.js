@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const joi = require("joi");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 module.exports = (pool) => {
-  router.post("/login", async (req, res) => {
+  router.post("/", async (req, res) => {
     try {
       const { error } = validate(req.body);
       if (error) return res.status(400).json(error.details[0].message);
@@ -18,9 +20,6 @@ module.exports = (pool) => {
         return res.status(401).json("Invalid email or password");
       }
 
-      // if (user.rows[0].password !== password) {
-      //   return res.status(401).json("Invalid email or password");
-      // }
       const validPassword = await bcrypt.compare(
         req.body.password,
         user.rows[0].password_hash,
@@ -28,7 +27,10 @@ module.exports = (pool) => {
       if (!validPassword)
         return res.status(401).json("Invalid email or password");
 
-      res.status(200).json("Login successful");
+      // Generate JWT token
+      const token = generateAuthToken(user.rows[0]);
+
+      res.status(200).send({ data: token, message: "Logged in successfully" });
     } catch (err) {
       console.error(err.message);
       res.status(500).json("Server Error");
@@ -41,6 +43,14 @@ module.exports = (pool) => {
       password: joi.string().required().label("Password"),
     });
     return schema.validate(data);
+  };
+
+  const generateAuthToken = (user) => {
+    return jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
   };
 
   return router;
