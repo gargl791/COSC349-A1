@@ -35,12 +35,14 @@ pool.connect((err, client, release) => {
 // Import routes
 const userRoutes = require("./routes/users");
 const taskRoutes = require("./routes/tasks");
+const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/categories");
 
 // Use routes
 app.use("/api/users", userRoutes(pool));
 app.use("/api/tasks", taskRoutes(pool));
 app.use("/api/categories", categoryRoutes(pool));
+app, use("/api/auth", authRoutes(pool));
 // Catch-all route for undefined endpoints
 
 // app.use((req, res) => {

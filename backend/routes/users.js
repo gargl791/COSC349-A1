@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 module.exports = (pool) => {
   // Create a new user
   router.post("/", async (req, res) => {
-    const { username, email, password_hash } = req.body;
+    const { username, email, password } = req.body;
     try {
+      const salt = await bcrypt.genSalt(saltRounds);
+      const password_hash = await bcrypt.hash(password, salt);
       const newUser = await pool.query(
         "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *",
-        [username, email, password_hash]
+        [username, email, password_hash],
       );
       res.json(newUser.rows[0]);
+      res.status(201).json("User created successfully");
     } catch (err) {
       console.error(err.message);
       res.status(500).json("Server Error");
