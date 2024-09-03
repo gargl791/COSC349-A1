@@ -1,12 +1,46 @@
 import styles from "./styles.module.css";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from './Modal';
 
 const Main = () => {
+  const priorityMap = {
+    1: "Low",
+    2: "Med",
+    3: "High"
+  };
+  const url = "http://localhost:3000/api/tasks";
+  const userId = localStorage.getItem("userId");
   const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState(''); //create todo input
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchTasks = async () => {
+  //     try {
+  //       const response = await axios.get(`${url}/${userId}`);
+  //       setTasks(response.data);
+  //       console.log(response)
+  //     } catch (error) {
+  //       console.error('Error fetching tasks:', error);
+  //     }
+  //   };
+
+  //   fetchTasks();
+  // }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(`${url}/${userId}`);
+      setTasks(response.data);
+      console.log(response)
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -15,9 +49,12 @@ const Main = () => {
 
   const handleTaskCreate = async (data) => {
     try {
-      // const url = "http://localhost:3000/api/tasks";
-      // const { data } = await axios.post(url, data);
-      console.log("Received data:", data);
+      //adding userId to json data
+      const newData = {userId, ...data}
+      const response = await axios.post(url, newData);
+      console.log("Received data:", newData);
+      // Fetch tasks again after creating a new task
+      fetchTasks();
     } catch (error) {
       console.error("Error creating task:", error);
     }
@@ -36,14 +73,16 @@ const Main = () => {
         <button className="add-task-button" onClick={() => setIsModalOpen(true)}>+ Add Todo</button>
       </div>
       <ul className="task-list">
-        {tasks.map((task, index) => (
+      {
+        tasks.map((task, index) => (
           <li key={index}>
             <h3>{task.title}</h3>
-            <p>Priority: {task.priority}</p>
+            <p>Priority: {priorityMap[task.priority]}</p>
             <p>Tags: {task.tags}</p>
-            <p>Date: {task.startDate} - {task.endDate}</p>
+            <p>Date: {task.endDate}</p>
           </li>
-        ))}
+        ))
+      }
       </ul>
       <Modal
         isOpen={isModalOpen}

@@ -28,9 +28,9 @@ function Modal({ isOpen, onClose, onSubmit }) {
                     <div className="form-group">
                         <label>Priority</label>
                         <div className="priority-options">
-                            <label><input type="radio" name="priority" value="High" required /> High</label>
-                            <label><input type="radio" name="priority" value="Mid" /> Mid</label>
-                            <label><input type="radio" name="priority" value="Low" /> Low</label>
+                            <label><input type="radio" name="priority" value="3" required /> High</label>
+                            <label><input type="radio" name="priority" value="2" /> Mid</label>
+                            <label><input type="radio" name="priority" value="1" /> Low</label>
                         </div>
                     </div>
                     <div className="form-group">

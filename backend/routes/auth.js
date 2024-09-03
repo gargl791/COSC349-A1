@@ -30,7 +30,7 @@ module.exports = (pool) => {
       // Generate JWT token
       const token = generateAuthToken(user.rows[0]);
 
-      res.status(200).send({ data: token, message: "Logged in successfully" });
+      res.status(200).send({ userId: user.rows[0].user_id, data: token, message: "Logged in successfully" });
     } catch (err) {
       console.error(err.message);
       res.status(500).json("Server Error");
