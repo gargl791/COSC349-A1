@@ -28,9 +28,9 @@ function CreateModal({ isOpen, onClose, onSubmit }) {
                     <div className="form-group">
                         <label>Priority</label>
                         <div className="priority-options">
-                            <label><input type="radio" name="priority" value="3" required /> High</label>
-                            <label><input type="radio" name="priority" value="2" /> Mid</label>
-                            <label><input type="radio" name="priority" value="1" /> Low</label>
+                            <label><input type="radio" name="priority" value="High" required /> High</label>
+                            <label><input type="radio" name="priority" value="Med" /> Med</label>
+                            <label><input type="radio" name="priority" value="Low" /> Low</label>
                         </div>
                     </div>
                     <div className="form-group">

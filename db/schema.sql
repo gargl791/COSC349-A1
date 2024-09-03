@@ -11,6 +11,8 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL
 );
 
+CREATE TYPE valid_priority AS ENUM('Low', 'Med', 'High');
+
 -- Tasks Table
 CREATE TABLE tasks (
     task_id SERIAL PRIMARY KEY,
@@ -19,7 +21,7 @@ CREATE TABLE tasks (
     description TEXT,
     due_date DATE,
     is_completed BOOLEAN DEFAULT FALSE,
-    priority ENUM('Low', 'Mid', 'High')
+    priority valid_priority,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

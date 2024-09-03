@@ -52,6 +52,7 @@ const Main = () => {
     try {
       //adding userId to json data
       const newData = {userId, ...data}
+      console.log("handleTaskCreate data: ", newData)
       const response = await axios.post(url, newData);
       console.log("Received data:", newData);
       // Fetch tasks again after creating a new task
@@ -97,7 +98,7 @@ const Main = () => {
         tasks.map((task, index) => (
           <li key={index}>
             <h3>{task.title}</h3>
-            <p>Priority: {priorityMap[task.priority]}</p>
+            <p>Priority: {task.priority}</p>
             <p>Tags: {task.tags}</p>
             <p>Date: {task.endDate}</p>
             <button className={styles.white_btn} onClick={() => setIsEditModalOpen(true) }>Edit</button>

@@ -5,6 +5,7 @@ module.exports = (pool) => {
     // Create a new task
     router.post('/', async (req, res) => {
         const { userId, title, endDate, priority } = req.body;
+        console.log("backend req: ", req.body)
         try {
             const newTask = await pool.query(
                 'INSERT INTO tasks (user_id, title, due_date, priority) VALUES ($1, $2, $3, $4) RETURNING *',
