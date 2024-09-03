@@ -40,5 +40,20 @@ module.exports = (pool) => {
         }
     });
 
+    // Delete a task
+    router.delete('/:taskId', async (req, res) => {
+        const { taskId } = req.params;
+        try {
+            const deleteTask = await pool.query('DELETE FROM tasks WHERE task_id = $1 RETURNING *', [taskId]);
+            if (deleteTask.rows.length === 0) {
+                return res.status(404).json('Task not found');
+            }
+            res.json('Task deleted successfully');
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).json('Server Error');
+        }
+    });
+
     return router;
 };

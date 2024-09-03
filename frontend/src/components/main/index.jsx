@@ -36,7 +36,7 @@ const Main = () => {
     try {
       const response = await axios.get(`${url}/${userId}`);
       setTasks(response.data);
-      console.log(response)
+      console.log(response.data)
     } catch (error) {
       console.error('Error fetching tasks:', error);
     }
@@ -60,6 +60,15 @@ const Main = () => {
     }
   };
 
+  const handleTaskDelete = async (taskId) => {
+    try {
+      const response = await axios.delete(`${url}/${taskId}`);
+      fetchTasks();
+    } catch (error) {
+      console.log("Error deleting task: ", error);
+    }
+  }
+
   return (
     <div className={styles.main_container}>
       <nav className={styles.navbar}>
@@ -80,6 +89,8 @@ const Main = () => {
             <p>Priority: {priorityMap[task.priority]}</p>
             <p>Tags: {task.tags}</p>
             <p>Date: {task.endDate}</p>
+            <button className={styles.white_btn}>Edit</button>
+            <button className={styles.white_btn} onClick={() => handleTaskDelete(task.task_id) }>Delete</button>
           </li>
         ))
       }
