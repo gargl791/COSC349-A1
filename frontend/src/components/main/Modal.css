@@ -1,0 +1,92 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+}
+
+.date-range input[type="date"] {
+    padding: 5px;
+    background-color: #444;
+    color: #ccc;
+    border: 1px solid #555;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.priority-options label {
+    margin-right: 10px;
+    color: #ccc;
+}
+
+.priority-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    background-color: #444;
+    color: #ccc;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cancel-button, .add-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #444;
+    color: #ccc;
+}
+
+.add-button {
+    background-color: #ffc107;
+    color: #333;
+}
