@@ -1,7 +1,8 @@
 import styles from "./styles.module.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Modal from './Modal';
+import CreateModal from './CreateModal';
+import EditModal from './EditModal';
 
 const Main = () => {
   const priorityMap = {
@@ -12,8 +13,8 @@ const Main = () => {
   const url = "http://localhost:3000/api/tasks";
   const userId = localStorage.getItem("userId");
   const [tasks, setTasks] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -60,6 +61,16 @@ const Main = () => {
     }
   };
 
+  const handleTaskEdit = async (taskId, newData) => {
+    try {
+      const response = await axios.put(`${url}/${taskId}`, newData);
+      console.log("Task updated:", response.data);
+      fetchTasks(); // Refresh the task list
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  }
+
   const handleTaskDelete = async (taskId) => {
     try {
       const response = await axios.delete(`${url}/${taskId}`);
@@ -78,8 +89,8 @@ const Main = () => {
         </button>
       </nav>
       <div>
-        <h2>Lets Get Productive</h2>
-        <button className="add-task-button" onClick={() => setIsModalOpen(true)}>+ Add Todo</button>
+        <h2>Let's Get Productive</h2>
+        <button className="add-task-button" onClick={() => setIsCreateModalOpen(true)}>+ Add Todo</button>
       </div>
       <ul className="task-list">
       {
@@ -89,16 +100,21 @@ const Main = () => {
             <p>Priority: {priorityMap[task.priority]}</p>
             <p>Tags: {task.tags}</p>
             <p>Date: {task.endDate}</p>
-            <button className={styles.white_btn}>Edit</button>
+            <button className={styles.white_btn} onClick={() => setIsEditModalOpen(true) }>Edit</button>
             <button className={styles.white_btn} onClick={() => handleTaskDelete(task.task_id) }>Delete</button>
           </li>
         ))
       }
       </ul>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+      <CreateModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
         onSubmit={handleTaskCreate}
+      />
+      <EditModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSubmit={handleTaskEdit}
       />
     </div>
   );

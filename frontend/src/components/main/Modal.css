@@ -12,18 +12,18 @@
 }
 
 .modal-content {
-    background: #333;
-    color: #fff;
+    background: #fff; /* White background */
+    color: #333; /* Dark text */
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 15px rgba(0, 128, 0, 0.3); /* Green shadow */
 }
 
 h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #ccc;
+    color: #006400; /* Dark green */
 }
 
 .form-group {
@@ -33,7 +33,7 @@ h2 {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #ccc;
+    color: #006400; /* Dark green */
 }
 
 .date-range {
@@ -43,16 +43,16 @@ h2 {
 
 .date-range input[type="date"] {
     padding: 5px;
-    background-color: #444;
-    color: #ccc;
-    border: 1px solid #555;
+    background-color: #f0fff0; /* Light green background */
+    color: #006400; /* Dark green text */
+    border: 1px solid #006400; /* Dark green border */
     border-radius: 4px;
     margin-right: 5px;
 }
 
 .priority-options label {
     margin-right: 10px;
-    color: #ccc;
+    color: #006400; /* Dark green */
 }
 
 .priority-options input[type="radio"] {
@@ -62,9 +62,9 @@ h2 {
 .input[type="text"] {
     width: 100%;
     padding: 5px;
-    background-color: #444;
-    color: #ccc;
-    border: 1px solid #555;
+    background-color: #f0fff0; /* Light green background */
+    color: #006400; /* Dark green text */
+    border: 1px solid #006400; /* Dark green border */
     border-radius: 4px;
 }
 
@@ -82,11 +82,11 @@ h2 {
 }
 
 .cancel-button {
-    background-color: #444;
-    color: #ccc;
+    background-color: #f0fff0; /* Light green background */
+    color: #006400; /* Dark green text */
 }
 
 .add-button {
-    background-color: #ffc107;
-    color: #333;
+    background-color: #008000; /* Green background */
+    color: #fff; /* White text */
 }

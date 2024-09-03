@@ -1,7 +1,7 @@
 import React from 'react';
 import './Modal.css';
 
-function Modal({ isOpen, onClose, onSubmit }) {
+function CreateModal({ isOpen, onClose, onSubmit }) {
     if (!isOpen) return null;
 
     const handleSubmit = (e) => {
@@ -47,4 +47,4 @@ function Modal({ isOpen, onClose, onSubmit }) {
     );
 }
 
-export default Modal;
+export default CreateModal;
