@@ -3,35 +3,19 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CreateModal from './CreateModal';
 import EditModal from './EditModal';
+import { formatDate } from "./FormatDate";
 
 const Main = () => {
-  const priorityMap = {
-    1: "Low",
-    2: "Med",
-    3: "High"
-  };
   const url = "http://localhost:3000/api/tasks";
   const userId = localStorage.getItem("userId");
   const [tasks, setTasks] = useState([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
+
   useEffect(() => {
     fetchTasks();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchTasks = async () => {
-  //     try {
-  //       const response = await axios.get(`${url}/${userId}`);
-  //       setTasks(response.data);
-  //       console.log(response)
-  //     } catch (error) {
-  //       console.error('Error fetching tasks:', error);
-  //     }
-  //   };
-
-  //   fetchTasks();
-  // }, []);
 
   const fetchTasks = async () => {
     try {
@@ -43,6 +27,12 @@ const Main = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
@@ -52,6 +42,8 @@ const Main = () => {
     try {
       //adding userId to json data
       const newData = {userId, ...data}
+
+      //format the dates
       console.log("handleTaskCreate data: ", newData)
       const response = await axios.post(url, newData);
       console.log("Received data:", newData);
@@ -62,7 +54,12 @@ const Main = () => {
     }
   };
 
-  const handleTaskEdit = async (taskId, newData) => {
+  const handleOpenEditModal = (task) => {
+    setTaskToEdit(task);
+    setIsEditModalOpen(true);
+  }
+
+  const handleTaskEdit = async (newData, taskId) => {
     try {
       const response = await axios.put(`${url}/${taskId}`, newData);
       console.log("Task updated:", response.data);
@@ -100,8 +97,9 @@ const Main = () => {
             <h3>{task.title}</h3>
             <p>Priority: {task.priority}</p>
             <p>Tags: {task.tags}</p>
-            <p>Date: {task.endDate}</p>
-            <button className={styles.white_btn} onClick={() => setIsEditModalOpen(true) }>Edit</button>
+            <p>Date: {`${formatDate(task.start_date)} - ${formatDate(task.end_date)}`}</p>
+            <button className={styles.white_btn} onClick={() => handleTaskDelete(task.task_id) }>Complete</button>
+            <button className={styles.white_btn} onClick={() => handleOpenEditModal(task) }>Edit</button>
             <button className={styles.white_btn} onClick={() => handleTaskDelete(task.task_id) }>Delete</button>
           </li>
         ))
@@ -116,6 +114,7 @@ const Main = () => {
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         onSubmit={handleTaskEdit}
+        task={ taskToEdit }
       />
     </div>
   );
