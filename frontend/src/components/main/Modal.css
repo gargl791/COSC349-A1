@@ -1,10 +1,19 @@
+:root {
+    --primary-color: #3bb19b;
+    --secondary-color: #edf5f3;
+    --text-dark: #333;
+    --text-light: #666;
+    --background: #f5f5f5;
+    --white: #ffffff;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,18 +21,20 @@
 }
 
 .modal-content {
-    background: #fff; /* White background */
-    color: #333; /* Dark text */
+    background: var(--white);
+    color: var(--text-dark);
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 400px;
-    box-shadow: 0px 0px 15px rgba(0, 128, 0, 0.3); /* Green shadow */
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+                0px 3px 4px 0px rgb(0 0 0 / 14%),
+                0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
 
 h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #006400; /* Dark green */
+    color: var(--primary-color);
 }
 
 .form-group {
@@ -33,7 +44,7 @@ h2 {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #006400; /* Dark green */
+    color: var(--text-dark);
 }
 
 .date-range {
@@ -42,17 +53,18 @@ h2 {
 }
 
 .date-range input[type="date"] {
-    padding: 5px;
-    background-color: #f0fff0; /* Light green background */
-    color: #006400; /* Dark green text */
-    border: 1px solid #006400; /* Dark green border */
-    border-radius: 4px;
+    padding: 15px;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 10px;
     margin-right: 5px;
+    font-size: 14px;
 }
 
 .priority-options label {
     margin-right: 10px;
-    color: #006400; /* Dark green */
+    color: var(--text-dark);
 }
 
 .priority-options input[type="radio"] {
@@ -61,11 +73,12 @@ h2 {
 
 .input[type="text"] {
     width: 100%;
-    padding: 5px;
-    background-color: #f0fff0; /* Light green background */
-    color: #006400; /* Dark green text */
-    border: 1px solid #006400; /* Dark green border */
-    border-radius: 4px;
+    padding: 15px;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
 }
 
 .form-buttons {
@@ -75,18 +88,31 @@ h2 {
 }
 
 .cancel-button, .add-button {
-    padding: 10px 20px;
+    padding: 12px 0;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .cancel-button {
-    background-color: #f0fff0; /* Light green background */
-    color: #006400; /* Dark green text */
+    background-color: var(--white);
+    color: var(--primary-color);
 }
 
 .add-button {
-    background-color: #008000; /* Green background */
-    color: #fff; /* White text */
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.cancel-button:hover, .add-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover {
+    background-color: #34a08b;
 }
