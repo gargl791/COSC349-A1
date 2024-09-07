@@ -9,7 +9,7 @@ Required Dependencies:
 
 - Docker
 
-Initialization:
+#### Initialization:
 
 `git clone` the repository to a directory, and `cd COSC349-A1` to move into the repository.
 
@@ -21,7 +21,7 @@ docker-compose up
 ```
 After completion of the automated build process (by checking docker desktop containers or terminal), navigate to `http://localhost:5173` in a web browser to access the web application.
 
-For subsequent redeployments:
+#### For subsequent redeployments:
 
 In order to rebuild the three container images after making changes to the application code, enter:
 ```
@@ -33,7 +33,7 @@ docker-compose up --build
 ```
 to automatically start up after building.
 
-To stop and delete the containers:
+#### To stop and delete the containers:
 ```
 docker-compose down
 ```
