@@ -9,6 +9,12 @@ Required Dependencies:
 
 - Docker
 
+Preloaded test data for demonstration purposes:
+
+- username: demo_user
+- email: demo_user@example.com
+- password: demo_user
+
 #### Initialization:
 
 `git clone` the repository to a directory, and `cd COSC349-A1` to move into the repository.
